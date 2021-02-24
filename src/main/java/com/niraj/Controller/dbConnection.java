@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.niraj.bank;
+package com.niraj.Controller;
 
 /**
  *
@@ -13,9 +13,9 @@ package com.niraj.bank;
 import java.sql.*;
 public class dbConnection { 
     private String className = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/bank";
+    private String url = "jdbc:mysql://localhost/bank";
     private String username = "root";
-    private String password = "N3Ur0t0x1c";
+    private String password = "root";
     private Connection conn;
 
     public Connection getConn() {
