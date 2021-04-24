@@ -10,16 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  *
  * @author Dell
  */
 public class BankControllerMYSQL implements BankControllerInterface{
-    dbConnection dbConn;
+    DbConnection dbConn;
 
     public BankControllerMYSQL() {
-        dbConn = new dbConnection();
+        dbConn =DbConnection.getInstance();
     }
     
     
@@ -47,6 +47,7 @@ public class BankControllerMYSQL implements BankControllerInterface{
 
     @Override
     public boolean newAccount(Account a) {
+       
         String sqlStmt = "INSERT INTO account (accNo, name, amount, accType) VALUES ("+a.getAccNo()+", \""+a.getName()+"\", "+a.getAmount()+", '"+a.getAccType()+"');";
         if(dbConn.iud(sqlStmt)>0){
             return true;

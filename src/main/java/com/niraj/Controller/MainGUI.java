@@ -22,7 +22,7 @@ public class MainGUI extends javax.swing.JFrame {
      */
     public MainGUI() {
         initComponents();
-        ViewPanel.setLayout(new GridLayout(1, 1));
+//        this.setLayout(new GridLayout(1, 1));
     }
 
     /**
@@ -35,7 +35,6 @@ public class MainGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
-        ViewPanel = new javax.swing.JPanel();
         MenuBar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         ExitMenuItem = new javax.swing.JMenuItem();
@@ -51,19 +50,6 @@ public class MainGUI extends javax.swing.JFrame {
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout ViewPanelLayout = new javax.swing.GroupLayout(ViewPanel);
-        ViewPanel.setLayout(ViewPanelLayout);
-        ViewPanelLayout.setHorizontalGroup(
-            ViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        ViewPanelLayout.setVerticalGroup(
-            ViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(ViewPanel, java.awt.BorderLayout.CENTER);
 
         FileMenu.setText("File");
 
@@ -152,60 +138,45 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitMenuItemMousePressed
 
     private void DepositMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DepositMenuItemMousePressed
-        
-        ViewPanel.removeAll();
+
         Deposit deposit = new Deposit();
-        ViewPanel.add(deposit);
+        this.add(deposit);
         deposit.setVisible(true);
-        ViewPanel.revalidate();
-        ViewPanel.repaint();
     }//GEN-LAST:event_DepositMenuItemMousePressed
 
     private void WithdrawMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WithdrawMenuItemMousePressed
         
-        ViewPanel.removeAll();
         Withdraw withdraw = new Withdraw();
-        ViewPanel.add(withdraw);
+        this.add(withdraw);
         withdraw.setVisible(true);
-        ViewPanel.revalidate();
-        ViewPanel.repaint();
     }//GEN-LAST:event_WithdrawMenuItemMousePressed
 
     private void CreateAccountMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateAccountMenuItemMousePressed
        
-        ViewPanel.removeAll();
         CreateAccount createAccount = new CreateAccount();
-        ViewPanel.add(createAccount);
+        this.add(createAccount);
         createAccount.setVisible(true);
-        ViewPanel.revalidate();
-        ViewPanel.repaint();
     }//GEN-LAST:event_CreateAccountMenuItemMousePressed
 
     private void DeleteAccountMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteAccountMenuItemMousePressed
-        ViewPanel.removeAll();
+        
         DeleteAccount deleteAccount = new DeleteAccount();
-        ViewPanel.add(deleteAccount);
+        this.add(deleteAccount);
         deleteAccount.setVisible(true);
-        ViewPanel.revalidate();
-        ViewPanel.repaint();
     }//GEN-LAST:event_DeleteAccountMenuItemMousePressed
 
     private void ViewAllAccountMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewAllAccountMenuItemMousePressed
-        ViewPanel.removeAll();
+        
         ViewAllAccount viewAllAccount = new ViewAllAccount();
-        ViewPanel.add(viewAllAccount);
+        this.add(viewAllAccount);
         viewAllAccount.setVisible(true);
-        ViewPanel.revalidate();
-        ViewPanel.repaint();
     }//GEN-LAST:event_ViewAllAccountMenuItemMousePressed
 
     private void FundTransferMenuItemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FundTransferMenuItemMousePressed
-        ViewPanel.removeAll();
+        
         FundTransfer fundTransfer = new FundTransfer();
-        ViewPanel.add(fundTransfer);
+        this.add(fundTransfer);
         fundTransfer.setVisible(true);
-        ViewPanel.revalidate();
-        ViewPanel.repaint();
     }//GEN-LAST:event_FundTransferMenuItemMousePressed
 
     /**
@@ -255,7 +226,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu TransactionMenu;
     private javax.swing.JMenuItem ViewAllAccountMenuItem;
-    private javax.swing.JPanel ViewPanel;
     private javax.swing.JMenuItem WithdrawMenuItem;
     private javax.swing.JMenu jMenu3;
     // End of variables declaration//GEN-END:variables

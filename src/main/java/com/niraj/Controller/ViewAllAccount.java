@@ -4,6 +4,11 @@ package com.niraj.Controller;
 import com.niraj.Controller.Account;
 import com.niraj.Controller.BankControllerInterface;
 import com.niraj.Controller.BankControllerMYSQL;
+import java.awt.GridLayout;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -17,9 +22,10 @@ package com.niraj.bank;
  *
  * @author nakarmi23
  */
-public class ViewAllAccount extends javax.swing.JPanel {
+public class ViewAllAccount extends javax.swing.JInternalFrame {
 
     BankControllerInterface dc = new BankControllerMYSQL();
+    Account selectedAccount;
     /**
      * Creates new form ViewAllAccount
      */
@@ -27,8 +33,18 @@ public class ViewAllAccount extends javax.swing.JPanel {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) AccountTable.getModel();
         for(Account a : dc.viewAllAccounts()){
-            model.addRow(new Object[]{a.getAccNo(), a.getName(), "Rs. "+a.getAmount(), a.getAccType()});
+            model.addRow(new Object[]{a.getAccNo(), a.getName(), a.getAmount(), a.getAccType()});
         }
+        AccountTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                int accNo = Integer.parseInt(AccountTable.getValueAt(AccountTable.getSelectedRow(), 0).toString());
+                String accountName = AccountTable.getValueAt(AccountTable.getSelectedRow(), 1).toString();
+                int amount = Integer.parseInt(AccountTable.getValueAt(AccountTable.getSelectedRow(), 2).toString());
+                char type = (AccountTable.getValueAt(AccountTable.getSelectedRow(), 3).toString()).charAt(0);
+                selectedAccount = new Account(accNo, accountName, amount,type);
+            }
+        });
     }
 
     /**
@@ -42,6 +58,9 @@ public class ViewAllAccount extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         AccountTable = new javax.swing.JTable();
+        WithdrawButton = new javax.swing.JButton();
+        DepositButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
 
         AccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,21 +80,67 @@ public class ViewAllAccount extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(AccountTable);
 
+        WithdrawButton.setText("Withdraw");
+
+        DepositButton.setText("Deposit");
+        DepositButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DepositButtonMouseClicked(evt);
+            }
+        });
+
+        DeleteButton.setText("Delete");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(WithdrawButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DepositButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DeleteButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(WithdrawButton)
+                    .addComponent(DepositButton)
+                    .addComponent(DeleteButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DepositButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DepositButtonMouseClicked
+        this.getParent().removeAll();
+        JPanel panel = new JPanel();
+        this.getParent().add(panel);
+        this.getParent().setLayout(new GridLayout(1, 1));
+        Deposit deposit = new Deposit();
+        panel.add(deposit);
+        panel.setVisible(true);
+        deposit.setVisible(true);
+        this.getParent().revalidate();
+        this.getParent().repaint();
+//        System.out.println(SwingUtilities.getAncestorOfClass(JPanel.class, this).toString());
+//        SwingUtilities.getAncestorOfClass(JPanel.class, this).removeAll();
+//        SwingUtilities.getAncestorOfClass(JPanel.class, this).revalidate();
+//        SwingUtilities.getAncestorOfClass(JPanel.class, this).repaint();
+    }//GEN-LAST:event_DepositButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AccountTable;
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JButton DepositButton;
+    private javax.swing.JButton WithdrawButton;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

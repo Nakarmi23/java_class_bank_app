@@ -11,19 +11,25 @@ package com.niraj.Controller;
  */
 
 import java.sql.*;
-public class dbConnection { 
+public class DbConnection { 
     private String className = "com.mysql.cj.jdbc.Driver";
     private String url = "jdbc:mysql://localhost/bank";
     private String username = "root";
     private String password = "root";
     private Connection conn;
-
+        
+    private static final DbConnection singleton = new DbConnection();
+    
+    public static DbConnection getInstance(){
+        return singleton;
+    }
+    
     public Connection getConn() {
         return conn;
     }
     
     
-    public dbConnection(){
+    public DbConnection(){
         try {
             Class.forName(className);
             conn = DriverManager.getConnection(url, username, password);
